@@ -51,6 +51,7 @@ int main(int argc, char *argv[])
 				write(1, &str[i], 1);
 				k--;
 			}
+			write(1, &str[i], 1);
 			i++;
 		}
 	}
