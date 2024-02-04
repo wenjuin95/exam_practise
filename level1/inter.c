@@ -28,16 +28,29 @@ int main(int ac, char **av)
 {
 	if(ac == 3)
 	{
+		/*example: ./inter abac abcdef
+  		* count av[2] and set them to 1
+    		* example: abcdef
+      		*          111111	
+    		* count av[1] and found 1 in the loop will return the alpahbet
+      		*example: abac
+		*         11 1
+		* chg it to 2 to prevent return again
+  		*example: abac
+    		*	  1121
+      		* return: abc
+    		*/
 		int tab[127] = {0}; //127 is the ascii table total 
 		int i =0;
 		char *s1 = av[1];
 		char *s2 = av[2];
 		while(s2[i])
+			//is important to chg to int
 			tab[(int)s2[i++]] = 1;
 		i = 0;
 		while(s1[i])
 		{
-			if(tab[(int)s1[i]] == 1) //the 1 is s2 flag
+			if(tab[(int)s1[i]] == 1) 
 			{
 				write(1, &s1[i], 1);
 				tab[(int)s1[i]] = 2;
