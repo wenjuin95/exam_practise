@@ -49,3 +49,19 @@ int main(int ac, char **av)
 	}
 	write(1, "\n", 1);
 }
+/*
+*example: ./a.out "hello world"
+*	 1. total length 12 (inc "\0")
+*	 [hello world|\0] (12)
+		     start
+*	 2. remove the \0
+*	 [hello world] (11)
+*	 3. not space then skip, count character until found space
+*	 [hello| world] (5)
+	       start
+*	 4. founnd space increase 1
+*	 [hello |world] (6)
+	        start
+*	 5. count and print
+*	 [world] 
+*/
