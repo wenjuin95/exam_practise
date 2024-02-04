@@ -31,16 +31,17 @@ int main(int ac, char **av)
 	int i = 0;
 	if(ac == 2)
 	{
+		//count the total string
 		while(av[1][i])
 			i++;
-		i--; //slice the '\0' in the whole sentence
-		while((av[1][i] == ' ' || av[1][i] == '\t') && i != 0) // in the first line check got space/tab
+		i--; //cut the '\0' in the whole sentence
+		while((av[1][i] == ' ' || av[1][i] == '\t') && i != 0) //check got space/tab at the back
 			i--;
-		while((av[1][i] != ' ' && av[1][i] != '\t') && i != 0) // in the first line check it is a character
+		while((av[1][i] != ' ' && av[1][i] != '\t') && i != 0) //check it is a character
 			i--;
-		if (av[1][i] == ' ' || av[1][i] == '\t') //if found it stop in increament it
+		if (av[1][i] == ' ' || av[1][i] == '\t') //if is space/tab increment it
 			i++;
-		while (av[1][i] && av[1][i] != ' ' && av[1][i] != '\t') 
+		while (av[1][i] && av[1][i] != ' ' && av[1][i] != '\t') //start print the string 
 		{
 			write(1, &av[1][i], 1);
 			i++;
