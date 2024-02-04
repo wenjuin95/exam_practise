@@ -41,7 +41,7 @@ int main(int ac, char **av)
 			i--;
 		if (av[1][i] == ' ' || av[1][i] == '\t') //if is space/tab increment it
 			i++;
-		while (av[1][i] && av[1][i] != ' ' && av[1][i] != '\t') //start print the string 
+		while (av[1][i] && av[1][i] != ' ' && av[1][i] != '\t') //start print the string (it ignore the front)
 		{
 			write(1, &av[1][i], 1);
 			i++;
