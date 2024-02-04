@@ -15,8 +15,23 @@ Your function must be declared as follows:
 int	    is_power_of_2(unsigned int n);
 */
 
+
 int	is_power_of_2(unsigned int n)
 {
+	/*
+	    example: 1. 16 % 2 == 0
+	 		16 / 2 = 8 (8 will return to the loop and recursive)
+	   	     2. 8 % 2 == 0
+			8 / 2 = 4
+	  	     3. 4 % 2 == 0
+		        4 / 2 = 2
+		     4. 2 % 2 == 0
+	                2 / 2 = 0 (0 is less then 1, it stop the loop)
+		1. n enter the loop
+  		2. if the n can't be divide by 2 return 0 
+    		3. if can be divided wil go to the loop again until it touch less then or equal to 0
+	    		
+	*/
 	while (n > 1)
 	{
 		if (n % 2 == 0)
