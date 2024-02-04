@@ -30,8 +30,6 @@ $
 $>
 */
 
-#include <unistd.h>
-
 int main(int argc, char *argv[])
 {
 	int i = 0;
@@ -41,19 +39,37 @@ int main(int argc, char *argv[])
 	{
 		str = argv[1];
 		while(str[i])
-		{
-			if(str[i] >= 'A' && str[i] <= 'Z') //minus 64 to get the numbers of alphabet
-				k = str[i] - 64;
+		{	
+			//this will count how many for each of the character
+			if(str[i] >= 'A' && str[i] <= 'Z') 
+				k = str[i] - 'A'; 
 			if(str[i] >= 'a' && str[i] <= 'z')
-				k = str[i] - 96;
-			while(k >= 1)
+				k = str[i] - 'a';
+			//this loop will print how many of the character count
+			while(k > 0)
 			{
 				write(1, &str[i], 1);
 				k--;
 			}
+			//after the loop done , print the original
 			write(1, &str[i], 1);
 			i++;
 		}
 	}
 	write(1, "\n", 1);
 }
+/*
+*example: ./a.out abc
+*	  [loop will print]
+*	  (nothing)
+*	  [then the original]
+*	  a
+*	  [loop will print]
+*	  ab
+*	  [then the original]
+*	  abb
+*	  [loop will print]
+*	  abbcc
+*	  [then the original]
+*	  abbccc
+*/
