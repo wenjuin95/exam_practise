@@ -58,6 +58,32 @@ int main(int argc, char *argv[])
 	}
 	write(1, "\n", 1);
 }
+
+//ver 2
+int main(int ac, char **av)
+{
+        if (ac == 2)
+        {
+                int i = 0;
+                while (av[1][i])
+                {
+                        write(1, &av[1][i], 1);
+                        int k = 0;
+                        if (av[1][i] >= 'a' && av[1][i] <= 'z')
+                                k = av[1][i] - 'a';
+                        if (av[1][i] >= 'A' && av[1][i] <= 'Z')
+                                k = av[1][i] - 'A';
+                        while (0 < k)
+                        {
+                                write(1, &av[1][i], 1);
+                                k--;
+                        }
+                        i++;
+                }
+        }
+        write(1, "\n", 1);
+}
+
 /*
 *example: ./a.out abc
 *	  [loop will print]
