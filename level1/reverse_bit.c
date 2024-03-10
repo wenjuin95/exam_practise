@@ -21,14 +21,14 @@
 
 unsigned char	reverse_bits(unsigned char octet)
 {
-	int		i = 8;
+	int		bit = 7;
 	unsigned char	res = 0;
 
-	while (i > 0)
+	while (0 <= bit)
 	{
 		res = res * 2 + (octet % 2); //shift left and add the last bit
 		octet = octet / 2; //shift right
-		i--;
+		bit--;
 	}
 	return (res);
 }
