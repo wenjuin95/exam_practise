@@ -17,7 +17,7 @@ Example, if you pass 2 to print_bits, it will print "00000010"
 #include <unistd.h>
 void	print_bits(unsigned char octet)
 {
-	int bit = 8;
+	int bit = 7;
 	while (0 <= bit)
 	{
 		if (octet & (1 << bit)) // "<<" 1 stating position is 8 and count from right. "&" is to compare the both bit
