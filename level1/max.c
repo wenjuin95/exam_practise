@@ -18,8 +18,8 @@ If the array is empty, the function returns 0.
 
 int max(int *tab, unsigned int len)
 {
-	int result = tab[0]; // initialize an array of 0
 	unsigned int i = 0;
+	int result = tab[i]; // initialize an array of i
 	//loop in the size given
 	while(i < len)
 	{
