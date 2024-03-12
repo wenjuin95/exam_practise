@@ -39,44 +39,31 @@ $>
 
 #include <unistd.h>
 
-int whitespace(char *str, int i)
-{
-	while(str[i] == ' ' || str[i] == '\t')
-		i++;
-	return i;
-}
-
-int wordlen(char *str)
-{
-	int i = 0;
-	while(str[i] && str[i] != ' ' && str[i] != '\t')
-		i++;
-	return i;
-}
-
-void epur_str(char *str)
-{
-	int i = 0;
-	int first_word = 1;
-	int word_len;
-
-	i = whitespace(str, i); //if the front not space it skip
-	while(str[i])
-	{
-		if (first_word == 0)
-			write(1, " ", 1);
-		word_len = wordlen(str + i);
-		write(1, str + i, word_len);
-		i = i + word_len;
-		first_word = 0;
-		i = whitespace(str, i);
-	}
-
-}
-
-int main(int ac, char **av)
+int main (int ac, char **av)
 {
 	if (ac == 2)
-		epur_str(av[1]);
+	{
+		int i = 0;
+		int flag;
+		
+		//skip the front space
+		while (av[1][i] == ' ' || av[1][i] == '\t')
+			i++;
+
+		//here start the function
+		while (av[1][i])
+		{
+			if (av[1][i] == ' ' || av[1][i] == '\t')
+				flag = 1;
+			if ((av[1][i] != ' ' && av[1][i] != '\t'))
+			{
+				if (flag == 1)
+					write(1, " ", 1);
+				flag = 0;
+				write(1, &av[1][i], 1);
+			}
+			i++;
+		}
+	}
 	write(1, "\n", 1);
 }
