@@ -39,35 +39,31 @@ $>
 
 #include <unistd.h>
 
-int wordlen(char *str)
-{
-	int i = 0;
-	while (str[i] && str[i] != ' ' && str[i] != '\t')
-		i++;
-	return i;
-}
-
-void expand_str(char *str)
-{
-	int len;
-	int first_word = 1;
-	int i = 0;
-	while(str[i])
-	{
-		while(str[i] == ' ' || str[i] == '\t')
-			i++;
-		len = wordlen(str + i);
-		if (0 < len && first_word == 0)
-			write(1, "   ", 3);
-		first_word = 0;
-		write(1, &str[i], len);
-		str = str + len;
-	}
-}
-
-int main(int ac, char **av)
+int main (int ac, char **av)
 {
 	if (ac == 2)
-		expand_str(av[1]);
+	{
+		int i = 0;
+		int flag;
+
+		//check the front
+		while (av[1][i] == ' ' || av[1][i] == '\t')
+			i++;
+
+		//here handle the function
+		while (av[1][i])
+		{
+			if (av[1][i] == ' ' || av[1][i] == '\t')
+				flag = 1;
+			if ((av[1][i] != ' ' && av[1][i] != '\t'))
+			{
+				if (flag == 1)
+					write(1, "   ", 3); //increase to 3 space
+				flag = 0;
+				write(1, &av[1][i], 1);
+			}
+			i++;
+		}
+	}
 	write(1, "\n", 1);
 }
