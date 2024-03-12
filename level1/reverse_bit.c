@@ -26,8 +26,8 @@ unsigned char	reverse_bits(unsigned char octet)
 
 	while (0 <= bit)
 	{
-		res = res * 2 + (octet % 2); //shift left and add the last bit
-		octet = octet / 2; //shift right
+		res = res * 2 + (octet % 2); //shift left and add the last bit (this to cal res to use)
+		octet = octet / 2; //shift right (this to cal octet to use)
 		bit--;
 	}
 	return (res);
