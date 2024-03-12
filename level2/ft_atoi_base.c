@@ -21,18 +21,19 @@ Your function must be declared as follows:
 int	ft_atoi_base(const char *str, int str_base);
 */
 
-char	to_lower(char c)
+//check the front
+char	is_space(char c)
 {
-	if (c >= 'A' && c <= 'Z')
-		return (c + 32);
-	return (c);
+	if (c <= 32)
+		return 1;
+	return 0;
 }
 
 int	get_number(char c, int base)
 {
 	int	nb;
 
-	//check base
+	//check base is less or more then 10
 	if (base <= 10)
 		nb = base + '0';
 	else
@@ -42,9 +43,11 @@ int	get_number(char c, int base)
 	if (c >= '0' && c <= '9' && c <= nb)
 		return (c - '0');
 	else if (c >= 'a' && c <= 'f' && c <= nb)
-		return (10 + c - 'a');
+		return (c - 'a' + 10);
+	else if (c >= 'A' && c <= 'F' && c <= nb)
+		return (c - 'A' + 10);
 	else
-		return (-1);
+		return (-1); //act as an error
 }
 
 int	ft_atoi_base(const char *str, int str_base)
@@ -52,13 +55,14 @@ int	ft_atoi_base(const char *str, int str_base)
 	int result = 0;
 	int sign = 1;
 	int i;
-
+	while (is_space(*str))
+		str++;
 	if (*str == '-')
 	{
 		sign = -1;
 		str++;
 	}
-	while ((i = get_number(to_lower(*str), str_base)) >= 0)
+	while ((i = get_number(*str), str_base)) >= 0)
 	{
 		result = result * str_base + (i * sign);
 		str++;
@@ -72,6 +76,7 @@ int main(int argc, char **argv)
 {
     if (argc == 3)
     {
+	//                            ff           16            = 255
         printf("%d\n", ft_atoi_base(argv[1], atoi(argv[2])));
     }
     return (0);
