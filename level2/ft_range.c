@@ -28,8 +28,8 @@ int     *ft_range(int start, int end)
 	int *result;
 	int i = 0;
 
-	size = abs((end - start)) + 1; // abs to control the negative and positive
-	result = malloc(sizeof(int) * size);
+	size = abs(end - start); // abs to control the negative and positive
+	result = malloc(sizeof(int) * size + 1);
 	if (!result)
 		return NULL;
 	if (start < end)
@@ -38,7 +38,7 @@ int     *ft_range(int start, int end)
 		{
 			result[i] = start;
 			start++;
-			i += 1;
+			i++;
 		}
 	}
 	else
@@ -47,7 +47,7 @@ int     *ft_range(int start, int end)
 		{
 			result[i] = start;
 			start--;
-			i += 1;
+			i++;
 		}
 	}
 	return result;
