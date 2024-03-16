@@ -22,52 +22,37 @@ int	ft_atoi_base(const char *str, int str_base);
 */
 
 //check the front
-char	is_space(char c)
-{
-	if (c <= 32)
-		return 1;
-	return 0;
-}
-
-int	get_number(char c, int base)
-{
-	int	nb;
-
-	//check base is less or more then 10
-	if (base <= 10)
-		nb = base + '0';
-	else
-		nb = base - 10 + 'a';
-
-	//convert number
-	if (c >= '0' && c <= '9' && c <= nb)
-		return (c - '0');
-	else if (c >= 'a' && c <= 'f' && c <= nb)
-		return (c - 'a' + 10);
-	else if (c >= 'A' && c <= 'F' && c <= nb)
-		return (c - 'A' + 10);
-	else
-		return (-1); //act as an error
-}
-
-int	ft_atoi_base(const char *str, int str_base)
+int ft_atoi_base(const char *str, int str_base)
 {
 	int result = 0;
 	int sign = 1;
-	int i;
-	while (is_space(*str))
-		str++;
-	if (*str == '-')
+	int i = 0;
+
+	if (str[0] == '-')
 	{
 		sign = -1;
-		str++;
+		i++;
 	}
-	while ((i = get_number(*str), str_base)) >= 0)
+
+	while (str[i] != '\0')
 	{
-		result = result * str_base + (i * sign);
-		str++;
+		char c = str[i];
+		int digit;
+
+		if (c >= '0' && c <= '9')
+			digit = c - '0';
+		else if (c >= 'a' && c <= 'f')
+			digit = c - 'a' + 10;
+		else if (c >= 'A' && c <= 'F')
+			digit = c - 'A' + 10;
+		else
+			break;
+		if (digit >= str_base)
+			break;
+		result = result * str_base + digit;
+		i++;
 	}
-	return (result);
+	return (sign * result);
 }
 
 #include <stdio.h>
