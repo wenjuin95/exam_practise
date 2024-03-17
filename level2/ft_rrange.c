@@ -22,24 +22,33 @@ Examples:
 
 #include <stdlib.h>
 
-int *ft_rrange(int start, int end)
+int *ft_range(int start, int end)
 {
-	int size = 1 + abs(end - start); // to prevent overflow
+	int size = 1 + abs(end - start);
 	int *res = malloc(sizeof(int) * size);
-	int step;
-	if (start > end) //this to determine the step
-		step = 1;
-	else
-		step = -1;
+	if (!res)
+		return NULL;
 	int i = 0;
-	while (i < size)
+	if (start < end)
 	{
-		res[i] = end;
-		end += step;
-		i++;
+		while (start <= end)
+		{
+			res[i] = end;
+			end --;
+			i++;
+		}
+	}
+	else 
+	{
+		while (start >= end)
+		{
+			res[i] = end;
+			end++;
+			i++;
+		}
 	}
 	return res;
-}	
+}
 
 #include <stdio.h>
 int main()
