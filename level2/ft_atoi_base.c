@@ -36,21 +36,19 @@ int ft_atoi_base(const char *str, int str_base)
 
 	while (str[i] != '\0')
 	{
-		char c = str[i];
-		int digit;
-
-		if (c >= '0' && c <= '9')
-			digit = c - '0';
-		else if (c >= 'a' && c <= 'f')
-			digit = c - 'a' + 10;
-		else if (c >= 'A' && c <= 'F')
-			digit = c - 'A' + 10;
-		else
-			break;
-		if (digit >= str_base)
-			break;
-		result = result * str_base + digit;
-		i++;
+		char n;
+		if (str[i] >= '0' && str[i] <= '9')
+			n = str[i] - '0';
+		else if (str[i] >= 'a' && str[i] <= 'f')
+			n = str[i] - 'a' + 10;
+		else if (str[i] >= 'A' && str[i] <= 'F')
+			n = str[i] - 'A' + 10; 
+		else  
+		 	break;  
+		if (n >= str_base) 
+			break;  
+		res = res * str_base + n; 
+		i++; 
 	}
 	return (sign * result);
 }
