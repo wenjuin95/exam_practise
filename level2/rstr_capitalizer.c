@@ -30,39 +30,33 @@ $>
 
 #include <unistd.h>
 
-void str_cap(char *str)
-{
-	while (*str)
-	{
-		while (*str && (*str == ' ' || *str == '\t'))
-		{
-				write(1, str, 1);
-				str++;
-		}
-		while (*str && *str != ' ' && *str != '\t')
-		{
-			if (*str >= 'a' && *str <= 'z' && (*(str + 1) == '\0' || *(str + 1) == ' ' || *(str + 1) == '\t' ))
-				*str = *str - 32;
-			else if (*str >= 'A' && *str <= 'Z' && *(str + 1) != '\0' && *(str + 1) != ' ' && *(str + 1) != '\t' )
-				*str = *str + 32;
-			write(1, str, 1);
-			str++;
-		}
-	}
-	write(1, "\n", 1);
-}
-
 int main(int ac, char **av)
 {
-	if (ac == 1)
-		write(1, "\n", 1);
-	else
+	if (ac != 1)
 	{
 		int i = 1;
-		while(i < ac)
+		while (i < ac)
 		{
-			str_cap(av[i]);
+			int j = 0;
+			char c;
+			while (av[i][j])
+			{
+				if (av[i][j] >= 'A' && av[i][j] <= 'Z')
+					c = av[i][j] + 32;
+				else
+					c = av[i][j];
+				if (av[i][j+1] == ' ' || av[i][j+1] == '\t' || av[i][j+1] == '\0')
+				{
+					if (c >= 'a' && c <= 'z')
+						c = c - 32;
+				}
+				write(1, &c, 1);
+				j++;
+			}
 			i++;
+			write(1,"\n", 1);
 		}
 	}
+	else
+		write(1, "\n", 1);
 }
