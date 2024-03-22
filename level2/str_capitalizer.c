@@ -71,3 +71,38 @@ int main(int ac, char **av)
 		}
 	}
 }
+
+//ver 2
+int main(int ac, char **av)
+{
+	if (ac != 1)
+	{
+		int i = 1;
+		while (i < ac)
+		{
+			int j = 0;
+			char c;
+			int flag = 0;
+			while (av[i][j])
+			{
+				if (av[i][j] >= 'A' && av[i][j] <= 'Z')
+					c = av[i][j] + 32;
+				else
+					c = av[i][j];
+				if (c == ' ' || av[i][j] == '\t')
+						flag = 1;
+				if (c >= 'a' && c <= 'z' && (flag == 1 || j == 0))
+				{
+					c = c - 32;
+					flag = 0;
+				}	
+				write(1, &c, 1);
+				j++;
+			}
+			i++;
+			write(1,"\n", 1);
+		}
+	}
+	else
+		write(1, "\n", 1);
+}
