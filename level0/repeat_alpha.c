@@ -30,36 +30,12 @@ $
 $>
 */
 
-int main(int argc, char *argv[])
-{
-	int i = 0;
-	int k = 0;
-	char *str;
-	if(argc == 2)
-	{
-		str = argv[1];
-		while(str[i])
-		{	
-			//this will count how many for each of the character
-			if(str[i] >= 'A' && str[i] <= 'Z') 
-				k = str[i] - 'A'; 
-			if(str[i] >= 'a' && str[i] <= 'z')
-				k = str[i] - 'a';
-			//this loop will print how many of the character count
-			while(k > 0)
-			{
-				write(1, &str[i], 1);
-				k--;
-			}
-			//after the loop done , print the original
-			write(1, &str[i], 1);
-			i++;
-		}
-	}
-	write(1, "\n", 1);
-}
 
-//ver 2
+/*
+*	1. outter loop through the string and write out
+*	2. it get alphabet position and convert into the number of alphabet by "- a" and "- A"
+*	3. inner loop will loop the number of alphabet that count and write out
+*/
 int main(int ac, char **av)
 {
         if (ac == 2)
