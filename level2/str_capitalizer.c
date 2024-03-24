@@ -76,9 +76,10 @@ int main(int ac, char **av)
 /*
 *	1. loop through the whole argument
 *	2. loop through each of the word
-*	3. make all to small letter
-*	4. use flag to check after space have letter
-*	5. use flag to handle the first word to chg big letter
+*	3. check if is big make it small letter
+*	4. after the word check is space or tab then open flag
+*	5. if the flag is on the next word should be chg (if is small chg big)
+*	note: "j=0" mean first letter of the word
 *	6. handle each argument to next line
 */
 int main(int ac, char **av)
