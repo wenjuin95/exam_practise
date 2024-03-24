@@ -11,6 +11,13 @@
 //
 // char    *ft_strrev(char *str);
 
+/*
+*	1. count the length of the string
+*	2. minus 1 for remove null terminator
+*	3. compare with 0 and the total length
+* 	4. swap with smaller and bigger
+*	5.increase the 0 and decrease the length
+*/
 char *ft_strrev(char *str)
 {
 	int i = 0;
