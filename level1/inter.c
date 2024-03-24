@@ -24,6 +24,11 @@
 
 #include <unistd.h>
 
+/*
+*	1. make and array that take 127 storage and assign all to 0
+*	2. loop av[2] and found the alphabet and assign to the array to 1
+*	3. loop av[1] and check if the array that assign 1 found then write and assign to 2 (prevent to reuse)
+*/
 int main(int ac, char **av)
 {
 	if(ac == 3)
