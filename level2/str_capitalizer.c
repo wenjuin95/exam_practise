@@ -73,34 +73,47 @@ int main(int ac, char **av)
 }
 
 //ver 2
+/*
+*	1. loop through the whole argument
+*	2. loop through each of the word
+*	3. make all to small letter
+*	4. use flag to check after space have letter
+*	5. use flag to handle the first word to chg big letter
+*	6. handle each argument to next line
+*/
 int main(int ac, char **av)
 {
 	if (ac != 1)
 	{
+		//loop through the argc for the sentence
 		int i = 1;
 		while (i < ac)
 		{
+			//loop through the word
 			int j = 0;
-			char c;
-			int flag = 0;
+			char c; //for the word chg
+			int flag = 0; //make flag for found the first word
 			while (av[i][j])
 			{
+				//check is 'A' to 'Z'
 				if (av[i][j] >= 'A' && av[i][j] <= 'Z')
-					c = av[i][j] + 32;
+					c = av[i][j] + 32; //chg to 'a' to 'z'
 				else
-					c = av[i][j];
+					c = av[i][j]; //maintain
+				//when next word is space
 				if (c == ' ' || av[i][j] == '\t')
-						flag = 1;
+						flag = 1; //open flag
+				//check the flag is true and the next word is 'a' to 'z' 
 				if (c >= 'a' && c <= 'z' && (flag == 1 || j == 0))
 				{
-					c = c - 32;
-					flag = 0;
+					c = c - 32; //chg to 'A' to 'Z'
+					flag = 0; //close flag
 				}	
-				write(1, &c, 1);
+				write(1, &c, 1); //write out
 				j++;
 			}
 			i++;
-			write(1,"\n", 1);
+			write(1,"\n", 1); //if have more argument make it line by line
 		}
 	}
 	else
