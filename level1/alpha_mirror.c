@@ -28,6 +28,11 @@
 
 #include <unistd.h>
 
+/*
+*	1. loop the string
+*	2. if is alphabet combine a and z and minus the current string
+*	3. write out
+*/
 int main(int ac, char **av)
 {
 	int i = 0;
