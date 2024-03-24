@@ -27,20 +27,31 @@
 
 //   unsigned int    lcm(unsigned int a, unsigned int b);
 
+
+/*
+*	1. check if not input
+*	2. compare which is the bigger and assign as bigger
+*	3. go through the loop and use bigger numer modulo until both have equal retrun
+*	4. keep increase the bigger number until they has equal number
+*/
 unsigned int    lcm(unsigned int a, unsigned int b)
 {
+	//check is both is 0
 	if (a == 0 || b == 0)
 		return 0;
+	//check which bigger to assign it
 	unsigned int n;
 	if (a > b)
 		n = a;
 	else
 		n = b;
+	//open the infinite loop
 	while (1)
 	{
 		//it increment the n until found the both first equal 
 		if (n % a == 0 && n % b == 0)
 			return n;
+		//if not it will keep increase
 		n++;
 	}
 }
