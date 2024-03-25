@@ -21,6 +21,9 @@ _____________
  0001 | 0100
 */
 
+/*
+*	1. swap position with return bitwise left and right and get the 4 position
+*/
 unsigned char	swap_bits(unsigned char octet)
 {
 	return((octet >> 4 | octet << 4));
