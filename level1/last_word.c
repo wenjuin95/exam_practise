@@ -26,6 +26,14 @@ lorem,ipsum$
 $>
 */
 #include <unistd.h>
+
+/*
+*	1. count the length of the string and minus the null terminator
+*	2. check the length from back if found space or tab then minus
+*	3. check the length from back if found a word then minus
+*	3. check if is space or tab then +1 for the length
+*	4. loop the string and skip the space or tab and start to write out
+*/
 int main(int ac, char **av)
 {
 	int i = 0;
