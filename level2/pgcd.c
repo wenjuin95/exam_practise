@@ -29,6 +29,10 @@ $
 #include <stdio.h>
 #include <stdlib.h>
 
+/*
+*	1. use av[1] or av[2] to assign to n
+*	2. loop the n and check if both have same result then return the result and break(break because we need first result)
+*/
 int main(int ac, char **av)
 {
 
