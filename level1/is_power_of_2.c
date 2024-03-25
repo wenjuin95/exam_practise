@@ -15,7 +15,13 @@ Your function must be declared as follows:
 int	    is_power_of_2(unsigned int n);
 */
 
-
+/*i
+*	0. this is to look for those that can be multiple only 2 with 2 and get the number
+*	1. loop the number from 1
+*	2. check the number modulo 2 result is return 0
+*	3. if is then divide it
+*	if is not then return 0
+*/
 int	is_power_of_2(unsigned int n)
 {
 	/*
@@ -34,10 +40,10 @@ int	is_power_of_2(unsigned int n)
 	*/
 	while (n > 1)
 	{
-		if (n % 2 == 0)
-			n = n / 2;
+		if (n % 2 == 0) //if the number modulo is 0
+			n = n / 2; //divide it until it less then 1
 		else 
-			return 0;
+			return 0; 
 	}
 	return 1;
 }
