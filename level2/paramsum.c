@@ -21,6 +21,10 @@ $>
 */
 #include <unistd.h>
 
+/*
+*	1. need ft_putnbr to help
+*	2. av -1 is to skip the program name
+*/
 void ft_putnbr(int n)
 {
 	char c;
