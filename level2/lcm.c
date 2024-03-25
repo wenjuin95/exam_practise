@@ -31,8 +31,8 @@
 /*
 *	1. check if not input
 *	2. compare which is the bigger and assign as bigger
-*	3. go through the loop and use bigger numer modulo until both have equal retrun
-*	4. keep increase the bigger number until they has equal number
+*	3. use infinite loop to compare the bigger number module by a and b
+*	4. if found the same then return if not keep increase the big number
 */
 unsigned int    lcm(unsigned int a, unsigned int b)
 {
