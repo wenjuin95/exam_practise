@@ -22,10 +22,22 @@ Examples:
 
 #include <stdlib.h>
 
+/*
+*	1. check which is bigger then take the bigger minus smaller to get size
+*	2. malloc the size
+*	//in this part we need reverse
+*	3. check if start bigger then end
+*	   ex: end will be assign to malloc with increament
+*	4. end bigger then start
+*	   ex: end will assign to malloc with decreament
+*/
 int *ft_range(int start, int end)
 {
-	int size = 1 + abs(end - start);
-	int *res = malloc(sizeof(int) * size);
+	if (star > end)
+		size = (start - end);
+	else
+		size = (end - start);
+	int *res = malloc(sizeof(int) * size + 1);
 	if (!res)
 		return NULL;
 	int i = 0;
