@@ -21,7 +21,11 @@ Your function must be declared as follows:
 int	ft_atoi_base(const char *str, int str_base);
 */
 
-//check the front
+/*
+*	1. like normal atoi handle pisitive and negative
+*	2. in the loop use if to check is 0 to 9 and is a to f or A to F 
+*	3. int the loop use if to check is the poisititon number is bigger equal to the str_base, if yes then break
+*/
 int ft_atoi_base(const char *str, int str_base)
 {
 	int result = 0;
