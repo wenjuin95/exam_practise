@@ -39,6 +39,15 @@ $>
 
 #include <unistd.h>
 
+
+/*
+*	1. loop through the string and skip the space or tab
+*	2. loop again
+*	3. while loop check if found space or tab then open flag
+*	4. check if found word then check again the flag is on or off
+*	5. if on write 3 space
+*	6. reset flag off and write out
+*/
 int main (int ac, char **av)
 {
 	if (ac == 2)
