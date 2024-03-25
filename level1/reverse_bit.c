@@ -19,6 +19,15 @@
 // 	 \/
 //  0110  0100
 
+
+/*
+*	1. assign bit with 7
+*	2. initialize res
+*	3. loop the bit and start from back (start from 0)
+*	4. "res * 2 + (octet % 2)" to input 0 from right
+*	5. "octet / 2" to remove 0 from left
+*	6. return res
+*/
 unsigned char	reverse_bits(unsigned char octet)
 {
 	int		bit = 7;
