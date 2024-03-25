@@ -28,6 +28,11 @@ $>
 */
 #include <unistd.h>
 
+/*
+*	1. loop both string
+*	2. if found the same word then count
+*	3. check if the first string had go through until '\0' then write 1 else 0
+*/
 int	main(int ac, char **av)
 {
 	int	i;
