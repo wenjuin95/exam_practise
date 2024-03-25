@@ -33,6 +33,7 @@ Examples:
 */
 int *ft_range(int start, int end)
 {
+	int size;
 	if (star > end)
 		size = (start - end);
 	else
