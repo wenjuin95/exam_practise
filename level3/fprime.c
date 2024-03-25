@@ -37,46 +37,39 @@ $
 #include <stdlib.h>
 #include <stdio.h>
 
-int is_prime(int n)
-{
-	int i = 2;
-	while (i < n)
-	{
-		if (n % i == 0)
-			return 0;
-		i++;
-	}
-	return 1;
-}
-
-void fprime(char *str)
-{
-	int n = atoi(str);
-	int factor = 2;
-	int first = 1; //checker
-
-	if (n == 1)
-		printf("1");
-	while (factor <= n)
-	{
-		if (n % factor == 0 && is_prime(factor))
-		{
-			if (first == 1)
-				printf("%d", factor);
-			else
-				printf("*%d", factor);
-			first = 0;
-			n = n / factor;
-		}
-		else
-			factor++;
-	}
-}
-
+/*
+*	1. check the number is 1 then print 1
+*	2. else loop the n
+*	3. check the prime
+*	4. if found prime the i will print out the number
+*	5. n divide by i for next search
+*	6. check if n is less then equal 2 then print *
+*	7. i - 1 for the loop to add 1 become 2(to prevent infinite loop)
+*/
 int main(int ac, char **av)
 {
 	if (ac == 2)
-		fprime(av[1]);
+	{
+		int i = 2;
+		int n = atoi(av[1]);
+		if (n == 1)
+			printf("1"); //check if only 1 then write 1
+		else
+		{
+			while (2 <= n) //loop the n
+			{
+				if (n % i == 0) //check for prime number
+				{
+					printf("%d", i); //print the prime
+					n /= i; //divide the n for the next search
+					if (n >= 2) //if the n still bigger then 1 then write *
+						printf("*");
+					i--; //2 - 1 = 1
+				}
+				i++; //1 + 1 = 2
+			}
+		}
+	}
 	printf("\n");
 }
 
