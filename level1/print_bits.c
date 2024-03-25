@@ -15,6 +15,16 @@ Example, if you pass 2 to print_bits, it will print "00000010"
 */
 
 #include <unistd.h>
+
+/*
+*	1. assign 7 bit for it
+*	2. loop through the bit and start from back (must start from 0)
+*	3. use "octet & (1 << bit)" to get 1 or 0
+*	note: bitwise left to open the position 1
+	      bitwise and to compare if both same then return
+*	4. if return 1 then write 1
+*	5. if is 0 write 0
+*/
 void	print_bits(unsigned char octet)
 {
 	int bit = 7;
