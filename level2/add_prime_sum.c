@@ -47,8 +47,18 @@ void ft_putnbr(int nb)
 	write(1, &c, 1);
 }
 
+/*
+*	1. check for the n is less then equal 1 then return 0 (0 and 1 nopt prime)
+*	2. assign i with 2
+*	3. loop from "i" to the number you give
+*	4. the number modulo with "i" until get 0
+*	5. if no 0 means is prime then return 1
+
+*/
 int prime_nb(int n)
 {
+	if (1 >= n)
+		return 0;
 	int i = 2;
 	while(i < n)
 	{
@@ -59,6 +69,12 @@ int prime_nb(int n)
 	return 1;
 }
 
+/*
+*	1. assign i with 2
+*	1. loop start form i to the number you given
+*	2 check if is prime (use function above) then sum together
+*	3 return total
+*/
 int add_prime(int n)
 {
 	int sum = 0;
