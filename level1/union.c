@@ -29,6 +29,17 @@ $>
 */
 #include <unistd.h>
 
+/*
+*	1. make and array that take 127 storage and assign all to 0
+*	//loop the argument to check each of the argument does it found repeat alphabet
+*	2. outside loop will loop the argument (start form 1 not 0)
+*	3. inside loop forthe string and found the alphabet and assign to the array to 1
+*	4. outside loop reset the string to 0 and repeat
+*	//loop the argument and write if found and check does it repeat
+*	1. outside loop will loop the argument (start from 1 not 0)
+*	3. inside loop for the string and check if the array that assign 1 found then write and assign to 2 (prevent to reuse)
+*	4. outside loop reset the string to 0 and repeat
+*/
 int main(int ac, char **av)
 {
 	char tab[256] = {0};
