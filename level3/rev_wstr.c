@@ -30,50 +30,42 @@ $
 $>
 */
 
+/*
+*	1. count the total length
+*	2. loop the total length
+*	3. decrement the length if found whitespace or is NULL terminator
+*	4. assign the position to "end"
+*	5. if is word keep decrement 
+*	6. assign the decrement word ad start + 1 (+1 is to got to the current position to start)
+*	7. also assign it to flag
+*	8. loop through within start and end and write out
+*	9. check if the flag is not 0 also write " 
+*/
 #include <unistd.h>
-
-int ft_strlen(char *str)
-{
-	int i = 0;
-	while (str[i])
-		i++;
-	return i;
-}
 
 int main(int ac, char **av)
 {
-	char *tmp;
-	char *rev;
-	int len;
-
 	if (ac == 2)
 	{
-		tmp = av[1];
-		len = ft_strlen(tmp);
-		rev = NULL;
-		len--; //remove the '\0'
-		while (tmp[len])
+		int i = 0;
+		while (av[1][i]) // count the total length
+			i++;
+		while (0 <= i)
 		{
-			if (tmp[len - 1] == ' ')// if before is ' '
+			while (av[1][i] == ' ' || av[1][i] == '\0' || av[1][i] == '\t') //skip the whitespace and null terminator
+				i--;
+			int end = i; //assing it as end
+			while (av[1][i] && av[1][i] != ' ' && av[1][i] != '\t') //if is word keep decrease
+				i--;
+			int start = i + 1; //after that iterate +1 to the current word
+			int flag = start; //assign as flag
+			while (start <= end) //go through the loop
 			{
-				rev = &tmp[len]; //rev will point at the tmp[len]
-				while(*rev && *rev != ' ')
-				{
-					write(1, rev, 1);
-					rev++;
-				}
-				write(1, " ", 1);
+				write(1, &av[1][start], 1); //write out
+				start++;
 			}
-			else if (len == 0) //if the len is 0
-			{
-				rev = &tmp[len]; //rev will point at the tmp[len]
-				while(*rev && *rev != ' ')
-				{
-					write(1, rev, 1);
-					rev++;
-				}
-			}
-			len--;
+			if (flag != 0) //the the flag if is not equal 0 keep write out " "
+				write(1, " ", 1)
 		}
 
 	}
