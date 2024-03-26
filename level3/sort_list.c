@@ -48,11 +48,11 @@ t_list	*sort_list(t_list* lst, int (*cmp)(int, int))
       i = lst->data;
       lst->data = lst->next->data;
       lst->next->data = i;
-      lst = tmp;
+      lst = tmp; //to reset the lst with tmp(tmp have the original pointer) for next swap
     }
     else
       lst = lst->next;
   }
-  lst = tmp;
+  lst = tmp; //tmp pointer now set to lst
   return lst;
 }
