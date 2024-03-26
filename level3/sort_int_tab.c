@@ -16,20 +16,23 @@ Doubles must be preserved.
 Input is always coherent.
 */
 
-void	sort_int_tab(int *tab, unsigned int size)
+/*
+*	1.loop the i with size given
+*		a. loop the j with + 1 (assign the next array to loop)
+*		b. compare the i and j
+* 		c. use swap
+*/
+void sort_int_tab(int *tab, unsigned int size)
 {
 	unsigned int i = 0;
-	unsigned int j;
-	int tmp;
-
-	while(i < size)
+	while (i < size)
 	{
-		j = i + 1;
+		unsigned int j = i + 1;
 		while (j < size)
 		{
 			if (tab[i] > tab[j])
 			{
-				tmp = tab[i];
+				int tmp = tab[i];
 				tab[i] = tab[j];
 				tab[j] = tmp;
 			}
@@ -40,20 +43,22 @@ void	sort_int_tab(int *tab, unsigned int size)
 }
 
 #include <stdio.h>
-void print_arr(int arr[], int size)
+int main()
 {
-    for (int i = 0; i < size; i++)
-    {
-        printf(" %d", arr[i]);
-    }
-    printf("\n");
-}
-
-int main (void)
-{
-    int arr[12] = {0 ,1, 3, 6, 2, 4, 1324, 16774, 9, 2, 1, 7};
-    int size = sizeof(arr) / sizeof(arr[0]);
-    sort_int_tab(arr, size);
-    print_arr(arr, size);
-    return 0;
+	int arr[] = {2, 5, 3, 1, 4, 6};
+	int size = 6;
+	int i = 0;
+	while (i < size)
+	{
+		printf("%d: %d\n", i, arr[i]);
+		i++;
+	}
+	printf("\n");
+	sort_int_tab(arr, size);
+	i = 0;
+	while (i < size)
+	{
+		printf("%d: %d\n", i, arr[i]);
+		i++;
+	}
 }
