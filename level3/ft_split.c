@@ -15,73 +15,71 @@ Your function must be declared as follows:
 char    **ft_split(char *str);
 */
 
+/*
+*	1. make a string copy with limit
+*	2. loop the string
+*		a. skip the whitespace
+*		b. check if the string not finish the increase 1 means found the word
+*		c. loop through the current word
+*	3. malloc the total word that you found
+*	4. loop through the string again
+*		a. skip the whitspace
+*		b. assign a starting index
+*		c. loop trough the current word
+*		d. compare the length of current word and index
+*		e. malloc the total length of current word
+*		f. copy to and array
+*	5. assign a null terminator
+*/
 #include <stdlib.h>
 
-//count the word character length
-int count_len(char *str)
+char *ft_strncpy(char *s1, char *s2, int n)
 {
 	int i = 0;
-	while(str[i] && str[i] != ' ' && str[i] != '\t' && str[i] != '\n')
-		i++; //count is word
-	return i;
-}
-
-//duplicate word
-char *dup_word(char *str)
-{
-	int i = 0;
-	int len = count_len(str);
-	char *result = malloc(sizeof(char) * (len + 1));
-	result[len] = '\0';
-	while (i < len)
+	while (s2[i] && i < n) //loop s2 andlimit the size
 	{
-		result[i] = str[i];
+		s1[i] = s2[i]; //it sopy to s1 with size given
 		i++;
 	}
-	return (result);
-}
-
-//fill each of word
-void fill_word(char **array, char *str)
-{
-	int word_index = 0;
-	while(*str == ' ' || *str == '\t' || *str == '\n')
-		str++; //move pointer
-	while(*str)
-	{
-		array[word_index] = dup_word(str);
-		word_index++;
-		while(*str && *str != ' ' && *str != '\t' && *str != '\n')
-			str++; //move pointer
-		while(*str == ' ' || *str == '\t' || *str == '\n')
-			str++; //move pointer
-	}
-}
-
-//count how many word
-int count_word(char *str)
-{
-	int word_index = 0;
-	while(*str == ' ' || *str == '\t' || *str == '\n')
-		str++; //move pointer
-	while(*str)
-	{
-		word_index++;
-		while(*str && *str != ' ' && *str != '\t' && *str != '\n')
-			str++; //move pointer
-		while(*str == ' ' || *str == '\t' || *str == '\n')
-			str++; //move pointer
-	}
-	return (word_index);
+	s1[i] = '\0'; //assign null to it
+	return s1;
 }
 
 char **ft_split(char *str)
 {
-	int num_word = count_word(str);
-	char **split = malloc(sizeof(char *) * (num_word + 1));
-	split[num_word] = 0;
-	fill_word(split, str);
-	return split;
+	int i = 0;
+	int wc = 0;
+	int j = 0;
+	int arr = 0;
+	while (str[i])
+	{
+		while (str[i] && (str[i] == ' ' || str[i] == '\t' || str[i] == '\n')) //skip front if found those
+			i++;
+		if (str[i]) //found the first word then increment
+			wc++;
+		while (str[i] && (str[i] != ' ' && str[i] != '\t' && str[i] != '\n')) //loop trough the word and found those
+			i++;
+	}
+	char **res = malloc(sizeof(char *) * wc + 1); //malloc the wc
+	if (res == NULL)
+		return NULL;
+	i = 0;
+	while (str[i])
+	{
+		while (str[i] && (str[i] == ' ' || str[i] == '\t' || str[i] == '\n')) //skip front if found those//skip the
+			i++;
+		j = i; //store the starting index of the word (that is 0)
+		while (str[i] && (str[i] != ' ' && str[i] != '\t' && str[i] != '\n')) //loop trough the word and count the length
+			i++;
+		if (i > j) //check wether word exist with (i: length >  j: 0)
+		{
+			res[arr] = malloc(sizeof(char) * (i - j) + 1); //malloc total  length
+			ft_strncpy(res[arr], &str[j], i - j); //coppy word to arr
+			arr++; //look for next word
+		}
+	}
+	res[arr] = '\0'; //put NULL to the arr
+	return res;
 }
 
 #include <stdio.h>
