@@ -36,6 +36,18 @@ $>
 */
 #include <unistd.h>
 
+/*
+*	1. skip the whitespce if found
+*	2. assign to j
+*	3. loop the string
+*		a. iterate trough the word
+*		b. iterate through the whitspace
+*		c. the both will get the first word
+*		d. loop the word with another condition is check before the word is whitespace
+*			> loop it and write out
+*		e. write out space
+*	4. get the j and write out
+*/
 int main(int ac, char **av)
 {
 	int i = 0;
