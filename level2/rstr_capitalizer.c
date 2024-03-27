@@ -50,22 +50,21 @@ int main(int ac, char **av)
 		{
 			//loop through the word
 			int j = 0;
-			char c;
 			while (av[i][j])
 			{
 				//check if is 'A' to 'Z'
 				if (av[i][j] >= 'A' && av[i][j] <= 'Z')
-					c = av[i][j] + 32; //chg to 'a' to 'z'
+					av[i][j] = av[i][j] + 32; //chg to 'a' to 'z'
 				else
-					c = av[i][j]; //remain
+					av[i][j] = av[i][j]; //remain
 				//check the word after is space, tab or null
 				if (av[i][j+1] == ' ' || av[i][j+1] == '\t' || av[i][j+1] == '\0')
 				{
 					// check the word is small letter
-					if (c >= 'a' && c <= 'z')
-						c = c - 32; //chg to big
+					if (av[i][j] >= 'a' && av[i][j] <= 'z')
+						av[i][j] = av[i][j] - 32; //chg to big
 				}
-				write(1, &c, 1); //write out
+				write(1, &av[i][j], 1); //write out
 				j++;
 			}
 			i++;
