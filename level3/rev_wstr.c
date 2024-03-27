@@ -33,13 +33,13 @@ $>
 /*
 *	1. count the total length
 *	2. loop the total length
-*	3. decrement the length if found whitespace or is NULL terminator
-*	4. assign the position to "end"
-*	5. if is word keep decrement 
-*	6. assign the decrement word ad start + 1 (+1 is to got to the current position to start)
-*	7. also assign it to flag
-*	8. loop through within start and end and write out
-*	9. check if the flag is not 0 also write " 
+*		a. loop the length with decrement the length if found whitespace or is NULL terminator
+*		b. assign the position to "end"
+*		c. loop the length witl decrement if is word 
+*		d. assign the decrement word ad start + 1 (+1 is to got to the current position to start)
+*		e. also assign it to flag
+*		f. loop through within start and end and write out with start--
+*		g. check if the flag is not 0 also write space
 */
 #include <unistd.h>
 
