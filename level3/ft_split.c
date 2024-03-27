@@ -78,7 +78,7 @@ char **ft_split(char *str)
 			arr++; //look for next word
 		}
 	}
-	res[arr] = '\0'; //put NULL to the arr
+	//res[arr] = '\0'; //put NULL to the arr
 	return res;
 }
 
