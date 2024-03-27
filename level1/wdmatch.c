@@ -29,6 +29,11 @@ $
 
 #include <unistd.h>
 
+/*
+*	1. loop the av[2] string
+*		a.check if found the similar character then iterate the av[1]
+*	2. check the av[1] is a string then print
+*/
 int main(int ac, char **av)
 {
 	if (ac == 3)
@@ -37,11 +42,11 @@ int main(int ac, char **av)
 		int i = 0;
 		while (av[2][j])
 		{
-			if (av[2][j] == av[1][i])
+			if (av[2][j] == av[1][i]) //if found the similar increase the av[1]
 				i++;
 			j++;
 		}
-		if (av[1][i] == '\0')
+		if (av[1][i] == '\0') //check if is found the whole string then print out
 		{
 			int k = 0;
 			while (av[1][k])
