@@ -29,7 +29,7 @@ int max(int *tab, unsigned int len)
 	unsigned int i = 0;
 	int result = tab[i]; // initialize an array of i
 	//loop in the size given
-	while(i <= len)
+	while(i < len) //until 1 not 0
 	{
 		//if the first array is highest assign it to result
 		//next compare the result with the array's
