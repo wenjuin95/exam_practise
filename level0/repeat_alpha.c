@@ -32,24 +32,23 @@ $>
 
 
 /*
-*	1. outter loop through the string and write out
-*	2. it get alphabet position and convert into the number of alphabet by "- a" and "- A"
-*	3. inner loop will loop the number of alphabet that count and write out
+*	1. use i to loop the string
+*	2. if is alphabet "- a - 1" to get the length of each alphabet and assign to j
+*	3. use j to write out each alphabet length
 */
 int main(int ac, char **av)
 {
         if (ac == 2)
         {
-                int i = 0;
+                int i = 0; // for string loop
                 while (av[1][i])
                 {
-                        write(1, &av[1][i], 1);
-                        int k = 0;
+                        int k = 1; //get the length
                         if (av[1][i] >= 'a' && av[1][i] <= 'z')
-                                k = av[1][i] - 'a';
-                        if (av[1][i] >= 'A' && av[1][i] <= 'Z')
-                                k = av[1][i] - 'A';
-                        while (0 < k)
+                                k = av[1][i] - ('a' - 1); //this will get number of length for each character to print
+                        else if (av[1][i] >= 'A' && av[1][i] <= 'Z')
+                                k = av[1][i] - ('A' - 1);
+                        while (1 <= k)
                         {
                                 write(1, &av[1][i], 1);
                                 k--;
@@ -62,16 +61,15 @@ int main(int ac, char **av)
 
 /*
 *example: ./a.out abc
-*	  [loop will print]
-*	  (nothing)
-*	  [then the original]
-*	  a
-*	  [loop will print]
-*	  ab
-*	  [then the original]
-*	  abb
-*	  [loop will print]
-*	  abbcc
-*	  [then the original]
-*	  abbccc
+*	  j = a - (a - 1)
+          j = 1; // 1 is the length for the first letter
+          output = a
+
+          j = b - (a - 1)
+          j = 2
+          output = abb
+
+          j = c - (a - 1)
+          j = 3
+          output = abbccc
 */
