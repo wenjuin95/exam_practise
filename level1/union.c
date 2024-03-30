@@ -35,35 +35,33 @@ $>
 */
 int main(int ac, char **av)
 {
-	char tab[256] = {0};
-	int i = 0;
-	int j = 1;
 	if (ac == 3)
 	{
-		//check both string
-		while (j < 3)
+		int arg = 1; //argument start from the second
+		int tab[127] = {0}; //flag
+		//loop all the argument and check each of the rgument had double
+		while(arg <= 2)
 		{
-			while(av[j][i])
-				tab[(int)av[j][i++]] = 1; //in the first string set all to 1
-			i = 0; //set i to the first to get to the next string
-			j++; //increament j to next string
+			int i = 0;
+			while (av[arg][i])
+				tab[(int)av[arg][i++]] = 1; //flag on to skip the similar alphabet
+			arg++;
 		}
-
-		//print both string
-		j = 1;
-		while (j < 3)
+		//loop and print if no double
+		arg = 1;
+		while (arg <= 2)
 		{
-			while (av[j][i]) 
+			int j = 0;
+			while (av[arg][j])
 			{
-				if (tab[(int)av[j][i]] == 1) //if the string found 1
+				if (tab[(int)av[arg][j]] == 1) //if flag on
 				{
-					write(1, &av[j][i], 1); // print it out
-					tab[(int)av[j][i]] = 2; //if fount the repeated character it not print out
+					write(1, &av[arg][j], 1); //print the flag
+					tab[(int)av[arg][j]] = 2; //to not printf the same flag
 				}
-				i++;
-			
-			i = 0; //set i to the first to get to the next string
-			j++; //increament j to next string
+				j++;
+			}
+			arg++;
 		}
 	}
 	write(1, "\n", 1);
