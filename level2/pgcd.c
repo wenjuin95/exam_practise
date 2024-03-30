@@ -40,10 +40,14 @@ int main(int ac, char **av)
 	{
 		int a = atoi(av[1]);
 		int b = atoi(av[2]);
-		int n = a;
+		int n;
+		if (a > b)
+			n = a;
+		else
+			n = b;
 		
 		//loop through and decreament the biggest until found same
-		while (n > 0)
+		while (n != 0)
 		{
 			if (a % n == 0 && b % n == 0)
 			{	
