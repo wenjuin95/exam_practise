@@ -52,7 +52,7 @@ int main (int ac, char **av)
 	if (ac == 2)
 	{
 		int i = 0;
-		int flag;
+		int flag = 0;
 		
 		//skip the front space
 		while (av[1][i] == ' ' || av[1][i] == '\t')
