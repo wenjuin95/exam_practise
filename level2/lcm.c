@@ -46,7 +46,7 @@ unsigned int    lcm(unsigned int a, unsigned int b)
 	else
 		n = b;
 	//open the infinite loop
-	while (0 <= n)
+	while (0 < n)
 	{
 		//it increment the n until found the both first equal 
 		if (n % a == 0 && n % b == 0)
