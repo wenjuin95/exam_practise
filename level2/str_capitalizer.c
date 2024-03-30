@@ -66,7 +66,7 @@ int main(int ac, char **av)
 					av[i][j] = av[i][j] - 32; //chg to 'A' to 'Z'
 					flag = 0; //close flag
 				}	
-				write(1, &c, 1); //write out
+				write(1, &av[i][j], 1); //write out
 				j++;
 			}
 			write(1,"\n", 1); //if have more argument make it line by line
