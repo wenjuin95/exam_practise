@@ -60,7 +60,7 @@ int prime_nb(int n)
 	if (1 >= n)
 		return 0;
 	int i = 2;
-	while(i < n)
+	while(i < n) //not = because don't let the number divide it self
 	{
 		if (n % i == 0)
 			return 0;
