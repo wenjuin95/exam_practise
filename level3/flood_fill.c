@@ -91,11 +91,20 @@ typedef struct  s_point
     int           y;
 }               t_point;
 
+/*
+*	tab: 2d array
+*	size: size of the 2D array
+*	cur: position of the 2D array
+*	to_fill: character to put
+*/
 void fill(char **tab, t_point size, t_point cur, char to_fill)
 {
+	//to check does it out of boundaries and check does the position match "to_fill"
 	if (cur.y < 0 || cur.y >= size.y || cur.x < 0 || cur.y >= size.x || tab[cur.y][cur.x] != to_fill)
 		return ;
+	//if the condition met then fill it with "F"
 	tab[cur.y][cur.x] = 'F';
+	//use recursion to check each position
 	fill(tab, size, (t_point){cur.y-1, cur.x}, to_fill);
 	fill(tab, size, (t_point){cur.y+1, cur.x}, to_fill);
 	fill(tab, size, (t_point){cur.y, cur.x-1}, to_fill);
