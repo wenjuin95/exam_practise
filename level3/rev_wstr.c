@@ -31,15 +31,12 @@ $>
 */
 
 /*
-*	1. count the total length
-*	2. loop the total length if bigger then equal 0
-*		a. loop the length with decrement the length if found whitespace or is NULL terminator
-*		b. assign the position to "end"
-*		c. loop the length witl decrement if is word 
-*		d. assign the decrement word ad start + 1 (+1 is to got to the current position to start)
-*		e. also assign it to flag
-*		f. loop through within start and end and write out with increament the start
-*		g. check if the flag is not 0 also write space
+*	1. count the total length of the string
+*	2. minus the length if found whitespace or NULL terminator and assign to end
+*	3. minus the lenght if found word then +1 and assign to start
+*	4. assign the start to flag
+*	4. check if end is bigger then start then print the start string
+	5. use the flag to check if the start string not 0 to keep print space after the start string
 */
 #include <unistd.h>
 
@@ -50,22 +47,22 @@ int main(int ac, char **av)
 		int i = 0;
 		while (av[1][i]) // count the total length
 			i++;
-		while (0 <= i)
+		while (0 <= i) //[from 0 <= i]
 		{
-			while (av[1][i] == ' ' || av[1][i] == '\0' || av[1][i] == '\t') //skip the whitespace and null terminator
+			while (av[1][i] == ' ' || av[1][i] == '\0' || av[1][i] == '\t') //decrease the position if found whitesapce or NULL
 				i--;
-			int end = i; //assing it as end
-			while (av[1][i] && av[1][i] != ' ' && av[1][i] != '\t') //if is word keep decrease
+			int end = i; //assign the position to end
+			while (av[1][i] && av[1][i] != ' ' && av[1][i] != '\t') //decrease the position if is the word
 				i--;
-			int start = i + 1; //after that iterate +1 to the current word
-			int flag = start; //assign as flag
-			while (start <= end) //go through the loop
+			int start = i + 1; //thios to prevent the last word no found (it minus until the first word if no +1 it will come -1 not 0)
+			int flag = start; //assign it to flag
+			while (start <= end) //if the end is bigger then start [from start <= end]
 			{
-				write(1, &av[1][start], 1); //write out
+				write(1, &av[1][start], 1); //write the start word
 				start++;
 			}
-			if (flag != 0) //the the flag if is not equal 0 keep write out " "
-				write(1, " ", 1)
+			if (flag != 0) //check if the start is not 0 
+				write(1, " ", 1) //make a space for it 
 		}
 
 	}
