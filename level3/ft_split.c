@@ -66,19 +66,18 @@ char **ft_split(char *str)
 	i = 0;
 	while (str[i])
 	{
-		while (str[i] && (str[i] == ' ' || str[i] == '\t' || str[i] == '\n')) //skip front if found those//skip the
+		while (str[i] && (str[i] == ' ' || str[i] == '\t' || str[i] == '\n')) //get whitespace position
 			i++;
-		j = i; //store the starting index of the word (that is 0)
-		while (str[i] && (str[i] != ' ' && str[i] != '\t' && str[i] != '\n')) //loop trough the word and count the length
+		j = i; //whitespace position assign j
+		while (str[i] && (str[i] != ' ' && str[i] != '\t' && str[i] != '\n')) //get word position
 			i++;
-		if (i > j) //check wether word exist with (i: length >  j: 0)
+		if (i > j) //check the word position is bigger then space
 		{
-			res[arr] = malloc(sizeof(char) * (i - j) + 1); //malloc total  length
+			res[arr] = malloc(sizeof(char) * (i - j) + 1); //i - j to get the length of the word
 			ft_strncpy(res[arr], &str[j], i - j); //coppy word to arr
-			arr++; //look for next word
+			arr++; //move to the next word to copy
 		}
 	}
-	//res[arr] = '\0'; //put NULL to the arr
 	return res;
 }
 
