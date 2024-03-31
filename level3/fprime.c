@@ -64,12 +64,39 @@ int main(int ac, char **av)
 					n /= i; //divide the n for the next search
 					if (n >= 2) //if the n still bigger then 1 then write *
 						printf("*");
-					i--; //2 - 1 = 1
+					i--; //this to reuse back te number
 				}
-				i++; //1 + 1 = 2
+				i++;
 			}
 		}
 	}
 	printf("\n");
 }
+
+/*
+*	1. 42 % 2 == 0
+*		print 2
+*		42 / 2 = 21
+* 		21 >= 2
+*    			print *
+*      		2 - 1 = 1
+*  	2. 21 % (1+1) != 0
+*	3. 21 % 3 = 0
+*		print 3
+*		21 / 3 = 7
+*  		7 >= 2
+*    			print *
+*      		3 - 1 = 2 	
+*	4. 7 % (2 + 1) != 0
+*	5. 7 % 4 != 0
+*	6. 7 % 5 != 0
+*	7. 7 % 6 != 0
+*	8. 7 % 7 == 0
+*		print 7
+*		7 / 7 = 1
+*  		1 >= 2
+*    			no print *
+*      		7 - 1 = 6
+*	9. 1 is not bigger then 2 so stop
+*/
 
