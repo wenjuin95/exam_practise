@@ -32,11 +32,12 @@ $>
 
 /*
 *	1. count the total length of the string
-*	2. minus the length if found whitespace or NULL terminator and assign to end
-*	3. minus the lenght if found word then +1 and assign to start
-*	4. assign the start to flag
-*	4. check if end is bigger then start then print the start string
-	5. use the flag to check if the start string not 0 to keep print space after the start string
+	2. loop the total length
+*		a. minus the length if found whitespace or NULL terminator and assign to end
+*		b. minus the lenght if found word then +1 and assign to start
+*		c. assign the start to flag
+*		d. check if end is bigger then start then print the start string
+		e. use the flag to check if the start string not 0 to keep print space after the start string
 */
 #include <unistd.h>
 
