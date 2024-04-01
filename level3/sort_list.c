@@ -35,24 +35,23 @@ int ascending(int a, int b)
 
 #include "list.h"
 
-t_list	*sort_list(t_list* lst, int (*cmp)(int, int))
+t_list	*sort_list(t_list *lst, int (*cmp)(int, int))
 {
-  t_list *tmp;
-  int i;
-  
-  tmp = lst;
-  while (lst)
-  {
-    if (((*cmp)(lst->data, lst->next->data)) == 0)
-    { 
-      i = lst->data;
-      lst->data = lst->next->data;
-      lst->next->data = i;
-      lst = tmp; //to reset the lst with tmp(tmp have the original pointer) for next swap
-    }
-    else
-      lst = lst->next;
-  }
-  lst = tmp; //tmp pointer now set to lst
-  return lst;
+	t_list	*tmp;
+
+	tmp = lst;
+	while(lst->next != NULL)
+	{
+		if (((*cmp)(lst->data, lst->next->data)) == 0)
+		{
+			int swap = lst->data;
+			lst->data = lst->next->data;
+			lst->next->data = swap;
+			lst = tmp;
+		}
+		else
+			lst = lst->next;
+	}
+	lst = tmp;
+	return (lst);
 }
