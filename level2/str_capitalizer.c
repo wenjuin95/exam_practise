@@ -41,7 +41,7 @@ $>
 */
 int main(int ac, char **av)
 {
-	if (ac != 1)
+	if (ac >= 1)
 	{
 		//loop through the argc for the sentence
 		int i = 1;
