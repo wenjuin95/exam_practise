@@ -94,28 +94,28 @@ No call to another function will be done on the file descriptor between 2 calls 
 
 	if (fd < 0 || BUFFER_SIZE <= 0 || read(fd, 0, 0) < 0)
 		return NULL;
-	line = ft_strdup(buffer);
-	while (!(newline = ft_strchr(line, '\n')) && (read_byte = read(fd, buffer, BUFFER_SIZE)))
+	line = ft_strdup(buffer); //the first if buffer had nothing it copy "\0" to line
+	while (!(newline = ft_strchr(line, '\n')) && (read_byte = read(fd, buffer, BUFFER_SIZE))) //buffer will get the number of BUFFER_SIZE given word and newline will get the line after "\n"
 	{
-		buffer[read_byte] = '\0';
-		line = ft_strjoin(line, buffer);
+		buffer[read_byte] = '\0'; //buffer then readed will put "\0"
+		line = ft_strjoin(line, buffer); //they will join and make a line
 	}
-	if (ft_strlen(line) == 0)
+	if (ft_strlen(line) == 0) //if the line doesn't have anything just return and free
 	{
 		free(line);
 		return NULL;
 	}
-	if (newline != NULL)
+	if (newline != NULL) //if the newline found something
 	{
-		to_copy = newline - line + 1;
-		ft_strcpy(buffer, newline + 1);
+		to_copy = newline - line + 1; //calculate the length of newline
+		ft_strcpy(buffer, newline + 1); // copy the content newline to the buffer
 	}
 	else
 	{
-		to_copy = ft_strlen(line);
-		buffer[0] = '\0';
+		to_copy = ft_strlen(line); //calsulate the whole length
+		buffer[0] = '\0'; //assign \0
 	}
-	line[to_copy] = '\0';
+	line[to_copy] = '\0'; //the buffer will copy to line
 	return (line);
  }
 
