@@ -62,7 +62,7 @@ No call to another function will be done on the file descriptor between 2 calls 
 	while (s[i])
 	{
 		if (s[i] == (char)c)
-			return ((char *)s);
+			return s;
 		i++;
 	}
 	return NULL;
