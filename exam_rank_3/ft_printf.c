@@ -47,29 +47,18 @@ int ft_putstr(char *str)
 	}
 }
 
-int ft_putnbr(int n)
+int ft_puthex(long long nb, int base)
 {
 	int len = 0;
-	long nb = n;
+	char *base_str = "0123456789abcdef";
 	if (nb < 0)
 	{
 		len += write(1, "-", 1);
-		nb *= -1;
+		nb = -nb;
 	}
-	if (nb >= 10)
-		len += ft_putnbr(nb / 10);
-	char c = nb % 10 + '0';
-	len += write(1, &c, 1);
-	return (len);
-}
-
-int ft_puthex(unsigned int nb)
-{
-	int len = 0;
-	char *base = "0123456789abcdef";
-	if (nb >= 16)
-		ft_puthex(nb / 16);
-	len += write(1, &base[nb % 16], 1);
+	if (nb >= base)
+		len += ft_puthex((nb / base), base);
+	len += write(1, &base_str[nb % base], 1);
 	return (len);
 }
 
@@ -89,9 +78,9 @@ int ft_printf(const char *format, ...)
 			if (format[i+1] == 's')
 				len += ft_putstr(va_arg(ptr, char *));
 			else if (format[i+1] == 'd')
-				len += ft_putnbr(va_arg(ptr, int));
+				len += ft_puthex((long long)va_arg(ptr, int), 10);
 			else if (format[i+1] == 'x')
-				len += ft_puthex(va_arg(ptr, unsigned int));
+				len += ft_puthex((long long)va_arg(ptr, unsigned int), 16);
 			i++;
 		}
 		else
@@ -101,3 +90,16 @@ int ft_printf(const char *format, ...)
 	va_end(ptr);
 	return (len);
 }
+
+// #include <stdio.h>
+
+// int main()
+// {
+// 	int len = 0;
+// 	int len2 = 0;
+// 	int i = 2147483647;
+// 	len += (ft_printf("%d\n", i));
+// 	ft_printf("%d\n", len);
+// 	len2 += (printf("%d\n", i));
+// 	printf("%d\n", len);
+// }
