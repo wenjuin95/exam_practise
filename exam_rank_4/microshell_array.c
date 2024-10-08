@@ -30,128 +30,100 @@
 // Hints:
 // Do not leak file descriptors!
 
-#include <unistd.h>
 #include <string.h>
-#include <stdlib.h>
+#include <unistd.h>
 #include <sys/wait.h>
+#include <stdlib.h>
 
+#define TRUE 1
+#define FALSE 0
 #define WRITEFD 1
 #define READFD 0
 
-# define TRUE 1
-# define FALSE 0
-
-/**
- * @brief print error message
- * @param str error message
-*/
-void error_msg(char *str)
+void err(char *str)
 {
-	while(*str)
+	while (*str)
 		write(2, str++, 1);
 }
 
-/**
- * @brief change the directory
- * @param av command line arguments
- * @param i index of the command
- * @return 0 if success else 1
-*/
-int cd(char **av, int i)
+int cd(char **argv, int i)
 {
+	//if position is not 2 then print error and return 1 (because the argument is not correct)
 	if (i != 2)
-		return error_msg("error: cd: bad arguments\n"), 1;
-	else if (chdir(av[1]) == -1)
-		return error_msg("error: cd: cannot change directory to "), error_msg(av[1]), error_msg("\n"), 1;
+		return err("error: cd: bad arguments\n"), 1;
+	//if chdir is equal to -1 then print error and return 1 (mean change directory failed)
+	if (chdir(argv[i]) == -1)
+		return err("error: cd: cannot change directory to "), err(argv[i]), err("\n"), 1;
 	return 0;
 }
 
-/**
- * @brief initialize fd
- * @param has_pipe boolean to ehck pipe
- * @param fd file descripter
- * @param fd_type is either WRITE or READ
-*/
-void set_pipe(int has_pipe, int fd[2], int fd_type)
+void set_pipe(int has_pipe, int *fd, int end)
 {
-	//if has_pipe is 1 and if dup2 is failed or close is failed then print error message and exit
-	if(has_pipe == TRUE && (dup2(fd[fd_type], fd_type) == -1 || close(fd[0]) == -1 || close(fd[1]) == -1))
-	{
-		error_msg("error: fatal\n");
-		exit(EXIT_FAILURE);
-	}
+	//if has_pipe is 1(true) and dup2 is equal to -1 or close is equal to -1 then print error and exit
+	if (has_pipe == TRUE && (dup2(fd[end], end) == -1 || close(fd[WRITEFD]) == -1 || close(fd[READFD]) == -1))
+		err("error: fatal\n"), exit(1);
 }
 
-/**
- * @brief execute the command
- * @param av command line arguments
- * @param i index of the command
- * @param env environment variable
- * @return 0 if success else 1
-*/
-int execute(char **av, int i, char **env)
+int	exec(char **argv, int i, char **envp)
 {
 	int has_pipe, fd[2], pid, status;
 
-	//if av[i] is not null and av[i] is pipe then has_pipe is 1
-	//1 is true and 0 is false
-	has_pipe = av[i] != NULL && strcmp(av[i], "|") == 0;
+	//if argument is not null and is equal to "|" then has_pipe is 1(true)
+	if (argv[i] != NULL && !strcmp(argv[i], "|"))
+		has_pipe = TRUE;
+	else
+		has_pipe = FALSE;
 
-	//if pipe is true and av[i] is cd then return cd function
-	if (has_pipe == TRUE && strcmp(*av, "cd") == 0)
-		return cd(av, i);
+	//if has_pipe is 0(false) and the first argument is equal to "cd" then return the cd function
+	if (has_pipe == FALSE && !strcmp(argv[0], "cd"))
+		return (cd(argv, i));
 
-	//if pipe is true and pipe is failed then print error message and exit
+	//if has_pipe is 1(ture) and pipe is equal to -1 then print error and exit	
 	if (has_pipe == TRUE && pipe(fd) == -1)
-	{
-		error_msg("error: fatal\n");
-		exit(EXIT_FAILURE);
-	}
+		err("error: fatal\n"), exit(1);
 
-	//fork the process for pipe is true and pipe is successful
-	pid = fork();
+	//if pid is equal to -1 then print error and exit
+	if ((pid = fork()) == -1)
+		err("error: fatal\n"), exit(1);
+
+	//if pid is equal to 0 
 	if (pid == 0)
 	{
-		av[i] = NULL; //is separate the command from left and right side of the pipe
-
-		set_pipe(has_pipe, fd, WRITEFD); //duplicate the write file descriptor and close the file descriptor
-
-		//if av is cd then return cd function
-		if (strcmp(*av, "cd") == 0)
-			return cd(av, i);
-
-		//if not then execute the command
-		execve(*av, av, env);
-		
-		//if execve is failed then print error message
-		error_msg("error: cannot execute "), error_msg(*av), error_msg("\n");
+		argv[i] = 0; //set the argument to 0
+		set_pipe(has_pipe, fd, WRITEFD); //set the pipe to write
+		if (!strcmp(argv[0], "cd")) //if the argument is equal to "cd" then exit
+			exit(cd(argv, i));
+		execve(argv[0], argv, envp); //execute the argument
+		err("error: cannot execute "), err(argv[0]), err("\n"), exit(1); //print error and exit if the execution failed
 	}
-	waitpid(pid, &status, 0);
-	set_pipe(has_pipe, fd, READFD); //duplicate the read file descriptor and close the file descriptor
-	return WIFEXITED(status) && WEXITSTATUS(status); //return the exit status
+	waitpid(pid, &status, 0); //wait for the child process to finish
+	set_pipe(has_pipe, fd, READFD); //set the pipe to read
+
+	//if the status is between 0 and 255 then return the status
+	if (status >= 0 && status <= 255)
+		return status;
+	else
+		return 1;
 }
 
-int main(int ac, char **av, char **env)
+int main(int argc, char **argv, char **envp)
 {
-	(void)ac;
-	int i = 1;
+	(void)argc;
+	int i = 0;
 	int status = 0;
 
-	while (av[i])
+	while (argv[i])
 	{
-		av += i; //move the pointer to the next command. This skips over the already processed arguments.
+		argv = argv + i + 1; //increament the pointer
+		i = 0; //reset 0 is the index
 
-		//counts the length of the current command by incrementing i until it encounters a NULL, |, or ;.
-		i = 0;
-		while (av[i] && strcmp(av[i], "|") != 0 && strcmp(av[i], ";") != 0)
+		//if the argument is not | or ; then increment the index
+		while (argv[i] && strcmp(argv[i], "|") && strcmp(argv[i], ";"))
 			i++;
-		
-		//if the length of the command is not 0 (mean programe name) then execute the command 
-		if (i != 0) 
-			status = execute(av, i, env);
 
-		//if the command is not NULL or | or ; then increment i
-		i += (av[i] != NULL);
+		//if i is not 0 mean is not the first argument
+		if (i != 0)
+			status = exec(argv, i, envp);
 	}
 	return status;
 }
